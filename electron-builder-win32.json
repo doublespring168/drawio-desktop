@@ -28,12 +28,6 @@
           "arch": [
             "ia32"
           ]
-      },
-      {
-          "target": "appx",
-          "arch": [
-            "ia32"
-          ]
       }
     ]
   },
@@ -44,12 +38,6 @@
   },
   "portable": {
     "artifactName": "${productName}-ia32-${version}-portable.${ext}"
-  },
-  "appx": {
-    "displayName": "draw.io Diagrams",
-    "publisherDisplayName": "JGraph Ltd",
-    "identityName": "draw.io.draw.ioDiagrams",
-    "publisher": "CN=9E628CCB-BE04-4557-A5A8-81EC34B09733"
   },
   "fileAssociations": [
 	  {

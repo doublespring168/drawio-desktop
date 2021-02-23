@@ -5,21 +5,12 @@ About
 
 Download built binaries from the [releases section](https://github.com/jgraph/drawio-desktop/releases).
 
-Travis MacOS/Linux builds   [![Build Status](https://travis-ci.com/jgraph/drawio-desktop.svg?branch=master)](https://travis-ci.com/github/jgraph/drawio-desktop)
-
-Appveyor Windows build  [![Build status](https://ci.appveyor.com/api/projects/status/e56wdssukquwe7bv?svg=true)](https://ci.appveyor.com/project/davidjgraph/drawio-desktop)
-
 Security
 --------
 
-draw.io Desktop is designed to be completely isolated from the Internet. All JavaScript files are self-contained, the Content Security Policy forbids running remotely loaded JavaScript.
+draw.io Desktop is designed to be completely isolated from the Internet, apart from the update process. This checks github.com at startup for a newer version and downloads it from an AWS S3 bucket owned by Github. All JavaScript files are self-contained, the Content Security Policy forbids running remotely loaded JavaScript.
 
 No diagram data is ever sent externally, nor do we send any analytics about app usage externally. This means certain functionality for which we do not have a JavaScript implementation do not work in the Desktop build, namely .vsd and Gliffy import.
-
-Build Status
-------------
-
-
 
 Developing
 ----------
@@ -30,10 +21,9 @@ Developing
 
 To run this:
 1. `npm install` (in the root directory of this repo)
-2. `npm install` (in the drawio directory of this repo)
+2. `npm install` (in the drawio directory of this repo `drawio/src/main/webapp`)
 3. export DRAWIO_ENV=dev if you want to develop/debug in dev mode.
-4. If you run in dev mode, clone https://github.com/jgraph/mxgraph as a sibling directory to this repo, rename the folder containing the repo "mxgraph2".
-5. `npm start` runs the app.
+4. `npm start` runs the app.
 
 To release:
 1. Update the draw.io sub-module and push the change. Add version tag before pushing to origin.
@@ -45,10 +35,4 @@ To release:
 7. Publish release
 
 
-
-![draw.io desktop app](screenshot.png)
-
-**draw-io desktop** uses [draw-io](https://github.com/jgraph/drawio). draw.io uses the [mxGraph library](https://github.com/jgraph/mxgraph) as the base of the stack, with the [GraphEditor example](https://github.com/jgraph/mxgraph/tree/master/javascript/examples/grapheditor) from mxGraph as the base of the application part. 
-
-![Dependency Diagram](dependency-diagram.png)
-[Edit this image](https://www.draw.io/#Hjgraph%2Fdrawio-desktop%2Fmaster%2Fdependency-diagram.png)
+*Note*: In Windows release, when using both x64 and is32 as arch, the result is one big file with both archs. This is why we split them.

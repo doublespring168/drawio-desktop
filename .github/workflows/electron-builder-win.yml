@@ -1,0 +1,35 @@
+name: Electron Builder CI (WIN)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Checkout reposistory
+      uses: actions/checkout@v2
+    - name: Installing Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - name: Build for Windows
+      shell: powershell #The default shell for Windows
+      run: |
+        git config --global core.autocrlf input
+        (gc .\.gitmodules) -replace 'git@github.com:','https://github.com/' | Out-File -encoding ASCII .gitmodules
+        git submodule update --init --recursive
+        npm install -g yarn
+        yarn install
+        cd drawio/src/main/webapp
+        yarn install
+        cd ../..
+        yarn run sync
+        yarn run release-win
+        yarn run release-win32
+        yarn run sync disableUpdate
+        yarn run release-appx
